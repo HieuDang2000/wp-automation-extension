@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <style>
+        body {
+            width: 350px;
+            padding: 20px;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            margin: 0;
+            background: #f8f9fa;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .header h1 {
+            margin: 0;
+            font-size: 18px;
+            color: #333;
+        }
+        
+        .header p {
+            margin: 5px 0 0 0;
+            color: #666;
+            font-size: 13px;
+        }
+        
+        .status-card {
+            background: white;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .status-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        
+        .status-item:last-child {
+            margin-bottom: 0;
+        }
+        
+        .status-label {
+            font-weight: 500;
+            color: #555;
+        }
+        
+        .status-value {
+            color: #333;
+        }
+        
+        .status-recording {
+            color: #e74c3c;
+            font-weight: 600;
+        }
+        
+        .status-stopped {
+            color: #7f8c8d;
+        }
+        
+        .actions {
+            display: grid;
+            gap: 10px;
+        }
+        
+        .btn {
+            padding: 12px 16px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 500;
+            transition: all 0.2s;
+            text-align: center;
+        }
+        
+        .btn-primary {
+            background: #667eea;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: #5a67d8;
+        }
+        
+        .btn-secondary {
+            background: white;
+            color: #555;
+            border: 1px solid #ddd;
+        }
+        
+        .btn-secondary:hover {
+            background: #f8f9fa;
+        }
+        
+        .btn-danger {
+            background: #e74c3c;
+            color: white;
+        }
+        
+        .btn-danger:hover {
+            background: #c0392b;
+        }
+        
+        .instructions {
+            background: #e3f2fd;
+            border-radius: 6px;
+            padding: 12px;
+            margin-top: 15px;
+            font-size: 12px;
+            color: #1565c0;
+            border-left: 3px solid #2196f3;
+        }
+        
+        .instructions h4 {
+            margin: 0 0 8px 0;
+            font-size: 13px;
+        }
+        
+        .instructions ul {
+            margin: 0;
+            padding-left: 16px;
+        }
+        
+        .instructions li {
+            margin-bottom: 4px;
+        }
+        
+        .divider {
+            height: 1px;
+            background: #eee;
+            margin: 15px 0;
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #eee;
+            font-size: 11px;
+            color: #999;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🎬 WordPress Action Recorder</h1>
+        <p>Ghi lại hành động để tạo automation script</p>
+    </div>
+    
+    <div class="status-card">
+        <div class="status-item">
+            <span class="status-label">Trạng thái:</span>
+            <span class="status-value" id="recording-status">Đang tải...</span>
+        </div>
+        <div class="status-item">
+            <span class="status-label">Session ID:</span>
+            <span class="status-value" id="session-id">-</span>
+        </div>
+        <div class="status-item">
+            <span class="status-label">Số bước đã ghi:</span>
+            <span class="status-value" id="total-steps">0</span>
+        </div>
+        <div class="status-item">
+            <span class="status-label">Trang hiện tại:</span>
+            <span class="status-value" id="current-page">-</span>
+        </div>
+    </div>
+    
+    <div class="actions">
+        <button id="toggle-recording" class="btn btn-primary">Bắt đầu ghi</button>
+        <button id="clear-session" class="btn btn-secondary">Xóa session hiện tại</button>
+        <button id="export-json" class="btn btn-secondary">📤 Export JSON</button>
+        <button id="export-script" class="btn btn-secondary">📜 Export Script</button>
+        <button id="view-sessions" class="btn btn-secondary">📋 Xem tất cả session</button>
+    </div>
+    
+    <div class="divider"></div>
+    
+    <div class="actions">
+        <button id="open-settings" class="btn btn-secondary">⚙️ Cài đặt</button>
+        <button id="help" class="btn btn-secondary">❓ Hướng dẫn</button>
+    </div>
+    
+    <div class="instructions">
+        <h4>💡 Cách sử dụng:</h4>
+        <ul>
+            <li>Click "Bắt đầu ghi" để bắt đầu recording</li>
+            <li>Thực hiện các thao tác trên WordPress Admin</li>
+            <li>Extension sẽ tự động ghi lại mọi hành động</li>
+            <li>Export JSON để backup hoặc Script để automation</li>
+        </ul>
+    </div>
+    
+    <div class="footer">
+        WordPress Action Recorder v1.0<br>
+        Tạo automation script từ hành động thực tế
+    </div>
+    
+    <script src="popup.js"></script>
+</body>
+</html>

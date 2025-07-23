@@ -1,0 +1,338 @@
+/* WordPress Action Recorder CSS */
+
+#wp-action-recorder {
+    position: fixed;
+    top: 32px; /* Dưới admin bar */
+    right: 20px;
+    width: 350px;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    z-index: 9999;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-size: 13px;
+    max-height: 80vh;
+    overflow: hidden;
+}
+
+.recorder-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 12px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 8px 8px 0 0;
+}
+
+.recorder-header h3 {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+#minimize-recorder {
+    background: rgba(255,255,255,0.2);
+    border: none;
+    color: white;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+}
+
+#minimize-recorder:hover {
+    background: rgba(255,255,255,0.3);
+}
+
+.recorder-content {
+    padding: 15px;
+    max-height: calc(80vh - 60px);
+    overflow-y: auto;
+}
+
+.recorder-controls {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 15px;
+}
+
+.recorder-controls button {
+    flex: 1;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 500;
+    transition: all 0.2s;
+}
+
+.btn-record {
+    background: #e74c3c;
+    color: white;
+}
+
+.btn-record:hover {
+    background: #c0392b;
+}
+
+.btn-stop {
+    background: #34495e;
+    color: white;
+}
+
+.btn-stop:hover {
+    background: #2c3e50;
+}
+
+.btn-pause {
+    background: #f39c12;
+    color: white;
+}
+
+.btn-pause:hover {
+    background: #e67e22;
+}
+
+.recording-info {
+    background: #f8f9fa;
+    padding: 12px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+
+.info-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+}
+
+.info-item:last-child {
+    margin-bottom: 0;
+}
+
+.info-item span:first-child {
+    font-weight: 500;
+    color: #555;
+}
+
+#recording-status {
+    font-weight: 600;
+}
+
+.status-recording {
+    color: #e74c3c;
+    animation: pulse 1.5s infinite;
+}
+
+.status-paused {
+    color: #f39c12;
+}
+
+.status-stopped {
+    color: #7f8c8d;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+.action-list {
+    margin-bottom: 15px;
+}
+
+.action-list h4 {
+    margin: 0 0 10px 0;
+    font-size: 13px;
+    color: #333;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 5px;
+}
+
+#action-log {
+    max-height: 200px;
+    overflow-y: auto;
+    border: 1px solid #eee;
+    border-radius: 5px;
+    background: #fafafa;
+}
+
+.action-item {
+    display: grid;
+    grid-template-columns: 30px 80px 1fr 60px;
+    gap: 8px;
+    padding: 8px 10px;
+    border-bottom: 1px solid #eee;
+    font-size: 11px;
+    align-items: center;
+}
+
+.action-item:last-child {
+    border-bottom: none;
+}
+
+.action-item:hover {
+    background: #f0f0f0;
+}
+
+.action-step {
+    background: #667eea;
+    color: white;
+    text-align: center;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    font-size: 10px;
+    font-weight: 600;
+}
+
+.action-type {
+    font-weight: 500;
+    color: #555;
+}
+
+.action-details {
+    color: #666;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.action-time {
+    font-size: 10px;
+    color: #999;
+}
+
+.recorder-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+}
+
+.recorder-actions button {
+    padding: 10px 12px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background: white;
+    cursor: pointer;
+    font-size: 11px;
+    font-weight: 500;
+    transition: all 0.2s;
+}
+
+.btn-clear {
+    color: #e74c3c;
+    border-color: #e74c3c;
+}
+
+.btn-clear:hover {
+    background: #e74c3c;
+    color: white;
+}
+
+.btn-export {
+    color: #27ae60;
+    border-color: #27ae60;
+}
+
+.btn-export:hover {
+    background: #27ae60;
+    color: white;
+}
+
+.btn-view {
+    color: #3498db;
+    border-color: #3498db;
+}
+
+.btn-view:hover {
+    background: #3498db;
+    color: white;
+}
+
+/* Notifications */
+.wp-recorder-notification {
+    position: fixed;
+    top: 60px;
+    right: 20px;
+    padding: 12px 16px;
+    border-radius: 5px;
+    color: white;
+    font-weight: 500;
+    font-size: 13px;
+    z-index: 10000;
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+    max-width: 300px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+}
+
+.wp-recorder-notification.show {
+    transform: translateX(0);
+}
+
+.notification-success {
+    background: #27ae60;
+}
+
+.notification-error {
+    background: #e74c3c;
+}
+
+.notification-warning {
+    background: #f39c12;
+}
+
+.notification-info {
+    background: #3498db;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    #wp-action-recorder {
+        width: 300px;
+        right: 10px;
+    }
+    
+    .recorder-actions {
+        grid-template-columns: 1fr;
+    }
+    
+    .action-item {
+        grid-template-columns: 25px 70px 1fr 50px;
+        gap: 5px;
+        font-size: 10px;
+    }
+}
+
+/* Scroll styling */
+#action-log::-webkit-scrollbar,
+.recorder-content::-webkit-scrollbar {
+    width: 6px;
+}
+
+#action-log::-webkit-scrollbar-track,
+.recorder-content::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 3px;
+}
+
+#action-log::-webkit-scrollbar-thumb,
+.recorder-content::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 3px;
+}
+
+#action-log::-webkit-scrollbar-thumb:hover,
+.recorder-content::-webkit-scrollbar-thumb:hover {
+    background: #a8a8a8;
+}

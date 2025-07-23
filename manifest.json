@@ -1,0 +1,26 @@
+{
+    "manifest_version": 3,
+    "name": "WordPress Action Recorder",
+    "version": "1.0",
+    "description": "Ghi lại các hành động trên WordPress Admin để tạo automation script",
+    "permissions": [
+      "activeTab",
+      "storage",
+      "downloads"
+    ],
+    "content_scripts": [
+      {
+        "matches": ["*://*/wp-admin/*"],
+        "js": ["content.js"],
+        "css": ["recorder.css"],
+        "run_at": "document_start"
+      }
+    ],
+    "action": {
+      "default_popup": "popup.html",
+      "default_title": "WordPress Action Recorder"
+    },
+    "background": {
+      "service_worker": "background.js"
+    }
+}
