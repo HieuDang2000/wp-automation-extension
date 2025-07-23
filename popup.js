@@ -241,11 +241,6 @@ function toggleRecording() {
     chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
         const tab = tabs[0];
         
-        if (!tab.url.includes('/wp-admin/')) {
-            alert('Vui lòng mở trang WordPress Admin trước khi ghi!');
-            return;
-        }
-        
         // Gửi message đến content script
         chrome.tabs.sendMessage(tab.id, {
             action: 'toggle_recording'

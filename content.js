@@ -24,8 +24,7 @@
     }
     
     function isWordPressAdmin() {
-        return window.location.href.includes('/wp-admin/') || 
-               document.body.classList.contains('wp-admin');
+        return true;
     }
     
     // Tạo giao diện recorder
