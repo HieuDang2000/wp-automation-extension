@@ -794,6 +794,32 @@
     function executeAction(action) {
             console.log(`Executing step ${action.step}: ${action.type}`);
             
+            // Special handling for step 4 (Add New Category button)
+            if (action.step === 4 && action.type === 'click') {
+                return new Promise((resolve) => {
+                    console.log('Special handling for step 4 - Add New Category button');
+                    
+                    // Try the direct selector first
+                    let addButton = document.querySelector("button.btn.btn-primary");
+                    
+                    // Check if button exists and is not disabled
+                    if (!addButton || addButton.disabled || addButton.classList.contains('disabled')) {
+                        console.log('Add New Category button not found or disabled, clicking Cancel button');
+                        let cancelButton = document.querySelector("#add-wp-cat-modal > div > div > div.modal-footer > div > div > button.btn.btn-default");
+                        if (cancelButton) {
+                            cancelButton.click();
+                        } else {
+                            console.warn('Cancel button not found in step 4');
+                        }
+                    } else {
+                        console.log('Found Add New Category button, clicking it');
+                        addButton.click();
+                    }
+                    
+                    setTimeout(resolve, 1000);
+                });
+            }
+            
             // Special handling for step 5 (import button)
             if (action.step === 5 && action.type === 'click') {
                 return new Promise((resolve) => {
@@ -802,28 +828,44 @@
                     // Try the direct selector first
                     let importButton = document.querySelector("#videos-found-header-left > span:nth-child(3) > button");
                     
-                    // If not found, try alternative selectors
-                    if (!importButton) {
-                        importButton = document.querySelector('.btn.btn-success i.fa.fa-cloud-download')?.closest('button');
-                    }
-                    
-                    if (!importButton) {
-                        const buttons = document.querySelectorAll('.btn.btn-success');
-                        for (let btn of buttons) {
-                            if (btn.textContent && btn.textContent.trim().includes('Import')) {
-                                importButton = btn;
-                                break;
-                            }
+                    // Check if button exists and is not disabled
+                    if (!importButton || importButton.disabled || importButton.classList.contains('disabled')) {
+                        console.log('Import button not found or disabled, clicking dropdown and selecting option');
+                        
+                        // Click the dropdown button
+                        let dropdownButton = document.querySelector("#videos-found-header-left > span:nth-child(3) > div > button");
+                        if (dropdownButton) {
+                            dropdownButton.click();
+                            
+                            // Wait a bit for dropdown to open, then click the option
+                            setTimeout(() => {
+                                let option = document.querySelector("#videos-found-header-left > span:nth-child(3) > div > div > ul > li:nth-child(5) > a");
+                                if (option) {
+                                    option.click();
+                                    console.log('Clicked dropdown option');
+                                } else {
+                                    console.warn('Dropdown option not found');
+                                }
+                                setTimeout(resolve, 1000);
+                            }, 500);
+                            setTimeout(() => {
+                                let importButton = document.querySelector("#videos-found-header-left > span:nth-child(3) > button");
+                                if (importButton) {
+                                    importButton.click();
+                                    console.log('Clicked import button');
+                                } else {
+                                    console.warn('Dropdown option not found');
+                                }
+                                setTimeout(resolve, 1000);
+                            }, 500);
+                        } else {
+                            console.warn('Dropdown button not found');
+                            resolve();
                         }
-                    }
-                    
-                    if (importButton) {
+                    } else {
                         console.log('Found import button, clicking it');
                         importButton.click();
-                        setTimeout(resolve, 2000); // Give it extra time
-                    } else {
-                        console.warn('Import button not found in step 5');
-                        resolve();
+                        setTimeout(resolve, 1000);
                     }
                 });
             }
