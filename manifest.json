@@ -4,6 +4,7 @@
     "version": "1.0",
     "description": "Ghi lại các hành động trên WordPress Admin để tạo automation script",
     "permissions": [
+      "tabs",
       "activeTab",
       "storage",
       "downloads"
