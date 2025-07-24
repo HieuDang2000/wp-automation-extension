@@ -94,6 +94,48 @@
         }
     }
 
+    function simulateCtrlTab() {
+        console.log('Simulating Ctrl+Tab key combination');
+        
+        // Create keyboard events for keydown
+        const ctrlDownEvent = new KeyboardEvent('keydown', {
+            key: 'Control',
+            code: 'ControlLeft',
+            ctrlKey: true,
+            bubbles: true
+        });
+        
+        const tabDownEvent = new KeyboardEvent('keydown', {
+            key: 'Tab',
+            code: 'Tab',
+            ctrlKey: true,
+            bubbles: true
+        });
+        
+        // Create keyboard events for keyup
+        const tabUpEvent = new KeyboardEvent('keyup', {
+            key: 'Tab',
+            code: 'Tab',
+            ctrlKey: true,
+            bubbles: true
+        });
+        
+        const ctrlUpEvent = new KeyboardEvent('keyup', {
+            key: 'Control',
+            code: 'ControlLeft',
+            ctrlKey: false,
+            bubbles: true
+        });
+        
+        // Dispatch the events in sequence
+        document.dispatchEvent(ctrlDownEvent);
+        document.dispatchEvent(tabDownEvent);
+        document.dispatchEvent(tabUpEvent);
+        document.dispatchEvent(ctrlUpEvent);
+        
+        console.log('Ctrl+Tab key combination simulated');
+    }
+
     // Process all product buttons sequentially
     async function processProducts() {
         console.log('Starting product button automation...');
@@ -105,7 +147,7 @@
         );
 
         // Wait before proceeding to next product
-        await new Promise(resolve => setTimeout(resolve, 1000));
+        await new Promise(resolve => setTimeout(resolve, 100));
 
         // Product AMVE
         await clickButtonAndWaitForPopup(
@@ -114,7 +156,7 @@
         );
 
         // Wait before proceeding to next product
-        await new Promise(resolve => setTimeout(resolve, 1000));
+        await new Promise(resolve => setTimeout(resolve, 100));
 
         // Product CTPL
         await clickButtonAndWaitForPopup(
@@ -123,6 +165,11 @@
         );
 
         console.log('Product button automation completed!');
+
+        // Simulate Ctrl+Tab after all steps are completed
+        setTimeout(() => {
+            simulateCtrlTab();
+        }, 500);
     }
 
     // Start the automation process

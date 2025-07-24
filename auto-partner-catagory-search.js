@@ -167,7 +167,7 @@
             },
             "bootstrapSelectAction": "toggle",
             "selectId": "partner_select",
-            "timeSincePrevious": 736
+            "timeSincePrevious": 100
         },
         {
             "step": 2,
@@ -352,7 +352,7 @@
             "optionIndex": "10",
             "optionValue": "null",
             "optionText": "PornerBros",
-            "timeSincePrevious": 612
+            "timeSincePrevious": 200
         },
         {
             "step": 3,
@@ -893,7 +893,7 @@
             "optionIndex": "10",
             "optionValue": "null",
             "optionText": "Creampie",
-            "timeSincePrevious": 821
+            "timeSincePrevious": 200
         },
         {
             "step": 6,
@@ -1756,6 +1756,49 @@
         }
         return null;
     }
+    
+    // Function to simulate Ctrl+Tab key combination
+    function simulateCtrlTab() {
+        console.log('Simulating Ctrl+Tab key combination');
+        
+        // Create keyboard events for keydown
+        const ctrlDownEvent = new KeyboardEvent('keydown', {
+            key: 'Control',
+            code: 'ControlLeft',
+            ctrlKey: true,
+            bubbles: true
+        });
+        
+        const tabDownEvent = new KeyboardEvent('keydown', {
+            key: 'Tab',
+            code: 'Tab',
+            ctrlKey: true,
+            bubbles: true
+        });
+        
+        // Create keyboard events for keyup
+        const tabUpEvent = new KeyboardEvent('keyup', {
+            key: 'Tab',
+            code: 'Tab',
+            ctrlKey: true,
+            bubbles: true
+        });
+        
+        const ctrlUpEvent = new KeyboardEvent('keyup', {
+            key: 'Control',
+            code: 'ControlLeft',
+            ctrlKey: false,
+            bubbles: true
+        });
+        
+        // Dispatch the events in sequence
+        document.dispatchEvent(ctrlDownEvent);
+        document.dispatchEvent(tabDownEvent);
+        document.dispatchEvent(tabUpEvent);
+        document.dispatchEvent(ctrlUpEvent);
+        
+        console.log('Ctrl+Tab key combination simulated');
+    }
 
     async function runAutomation() {
         console.log('Starting WordPress automation...');
@@ -1778,6 +1821,11 @@
         }
 
         console.log('Automation completed!');
+        
+        // Simulate Ctrl+Tab after all steps are completed
+        setTimeout(() => {
+            simulateCtrlTab();
+        }, 5000);
     }
 
     // Auto-start after page load
